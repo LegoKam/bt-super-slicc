@@ -1,0 +1,126 @@
+/* text-promp block */
+
+.text-promp-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+main > .section:has(.text-promp-wrapper) {
+  margin: 0;
+  padding: 0;
+}
+
+.text-promp {
+  display: flex;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+  background: #f5f5f5;
+}
+
+/* Image cell */
+.text-promp .text-promp-image {
+  flex: 0 0 38%;
+  overflow: hidden;
+}
+
+.text-promp .text-promp-image picture {
+  display: block;
+  line-height: 0;
+}
+
+.text-promp .text-promp-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text cell */
+.text-promp .text-promp-text {
+  flex: 1;
+  padding: 24px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
+}
+
+/* Title link */
+.text-promp .text-promp-text .button-container {
+  display: block;
+  margin-bottom: 16px;
+}
+
+main .text-promp a.button.primary:any-link {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: #004a92;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  display: inline;
+  font-family: var(--body-font-family, sans-serif);
+}
+
+main .text-promp a.button.primary:any-link:hover {
+  text-decoration: underline;
+}
+
+/* Body text */
+.text-promp .text-promp-text p {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.text-promp .text-promp-text p:last-child {
+  margin-bottom: 0;
+}
+
+.text-promp .text-promp-text strong {
+  font-weight: 700;
+  color: #171717;
+}
+
+.text-promp .text-promp-text a:any-link {
+  color: #004a92;
+  text-decoration: underline;
+}
+
+.text-promp .text-promp-text a:hover {
+  color: #003366;
+}
+
+/* Mobile: stack vertically */
+@media (width < 600px) {
+  .text-promp {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .text-promp .text-promp-image {
+    flex: none;
+  }
+
+  .text-promp .text-promp-text {
+    padding: 20px 16px;
+  }
+}
+
+@media (width >= 900px) {
+  .text-promp {
+    padding: 32px;
+  }
+
+  .text-promp .text-promp-text {
+    padding: 32px 48px;
+  }
+}

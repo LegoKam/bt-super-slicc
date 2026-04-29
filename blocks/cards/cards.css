@@ -1,14 +1,14 @@
-/* Cards block — "Your personal finances" style */
+/* Cards block */
 
-/* Section-level: gray background */
+/* Section-level: light gray background */
 .section.cards-container {
-  background: #f9f9f9;
+  background: #f5f5f5;
   margin: 0;
-  padding: 32px 0;
+  padding: 32px 0 40px;
 }
 
-/* Section heading styles */
-.section.cards-container .default-content-wrapper h2 {
+/* Section heading */
+.section.cards-container > .default-content-wrapper h2 {
   font-size: 32px;
   font-weight: 300;
   font-family: var(--heading-font-family, sans-serif);
@@ -17,32 +17,36 @@
   margin-bottom: 8px;
 }
 
-.section.cards-container .default-content-wrapper p {
+.section.cards-container > .default-content-wrapper p {
   font-size: 18px;
   color: #171717;
   line-height: 1.6;
   margin-bottom: 24px;
 }
 
-/* The cards block is the flex container; its children are the card rows */
+/* Cards grid */
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
-/* Each row = one card */
+/* Individual card */
 .cards > div {
   background: #fff;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  border-radius: 4px;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px 36px;
+  border-radius: 0;
+  border: 1px solid #e8e8e8;
 }
 
-/* Image cell */
+/* Icon image */
 .cards > div > .cards-image {
   line-height: 0;
+  margin-bottom: 16px;
 }
 
 .cards > div > .cards-image picture {
@@ -50,43 +54,41 @@
 }
 
 .cards > div > .cards-image img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
-/* Text cell */
+/* Text body */
 .cards > div > .cards-body {
-  padding: 20px 24px 27px;
+  padding: 0;
 }
 
 .cards > div > .cards-body h3 {
   margin-top: 0;
-  margin-bottom: 9px;
-  font-size: 24px;
+  margin-bottom: 12px;
+  font-size: 22px;
   font-weight: 600;
   line-height: 1.3;
 }
 
 .cards > div > .cards-body h3 a {
   color: #004a92;
-  text-decoration: none;
-}
-
-.cards > div > .cards-body h3 a:hover {
   text-decoration: underline;
 }
 
+.cards > div > .cards-body h3 a:hover {
+  color: #003366;
+}
+
 .cards > div > .cards-body p {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   color: #333;
   margin-top: 0;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
-/* CTA links — reset button styling from EDS/project */
+/* CTA links */
 main .cards .button-container {
   display: inline;
 }
@@ -94,33 +96,28 @@ main .cards .button-container {
 main .cards a.button:any-link {
   color: #004a92;
   text-decoration: underline;
-  text-decoration-color: rgba(0, 85, 133, 0.15);
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 15px;
+  font-weight: 400;
   background: none;
   border: none;
-  padding: 12px 0;
-  margin: 0;
-  text-align: left;
-  display: block;
+  padding: 0;
+  margin: 8px 0 0;
+  display: inline-block;
 }
 
 main .cards a.button:any-link:hover {
-  text-decoration-color: #004a92;
+  color: #003366;
 }
 
-/* Desktop: 3-column layout */
+/* Desktop: 3-column */
 @media (width >= 600px) {
   .cards {
     flex-direction: row;
-    gap: 24px;
+    gap: 20px;
   }
 
   .cards > div {
     flex: 1;
-  }
-
-  .cards > div > .cards-image img {
-    aspect-ratio: 16 / 9;
+    padding: 36px 28px 40px;
   }
 }

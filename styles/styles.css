@@ -42,6 +42,12 @@
   --nav-height: 48px;
 }
 
+@media (width >= 900px) {
+  :root {
+    --nav-height: 120px;
+  }
+}
+
 main .button-container { display: inline; }
 main a.button:any-link {
   background: none; border: none; border-radius: 0;
