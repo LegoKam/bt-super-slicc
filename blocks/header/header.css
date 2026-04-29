@@ -134,8 +134,8 @@ header .nav-brand {
 }
 
 header nav .nav-brand img {
-  width: 76px;
-  height: 31px;
+  /* width: 76px;
+  height: 31px; */
 }
 
 header nav .nav-brand a {
@@ -308,7 +308,8 @@ header nav .nav-search .icon img {
   }
 
   header nav .nav-brand img {
-    
+    /* width: 76px;
+    height: 31px; */
   }
 
   /* sections */
