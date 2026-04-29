@@ -1,0 +1,82 @@
+/* Columns block — Help & support 2-column link list layout */
+
+/* Section-level heading above the block */
+.columns-wrapper ~ h2,
+.section > div > h2:has(+ .columns-wrapper),
+.section > div > h2:first-child {
+  font-size: 32px;
+  font-weight: 300;
+  color: #171717;
+  margin: 0 0 24px;
+}
+
+.columns {
+  --columns-bg: #f9f9f9;
+  --columns-text: #171717;
+  --columns-link: #004a92;
+  --columns-gap: 36px;
+  --columns-padding: 27px 24px;
+  --columns-border: 1px solid #dfe4ea;
+}
+
+/* Row: side-by-side columns on desktop */
+.columns > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--columns-gap);
+}
+
+/* Each cell = a column card */
+.columns > div > div {
+  background: var(--columns-bg);
+  padding: var(--columns-padding);
+}
+
+/* Heading inside each column */
+.columns h3 {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--columns-text);
+  margin: 0 0 27px;
+  line-height: 1.25;
+}
+
+/* Link list */
+.columns ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.columns li {
+  padding: 13.5px 0;
+  border-bottom: var(--columns-border);
+}
+
+.columns li:last-child {
+  border-bottom: none;
+}
+
+.columns li a {
+  color: var(--columns-link);
+  text-decoration: underline;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 27px;
+}
+
+.columns li a:hover {
+  color: #003570;
+}
+
+@media (width >= 600px) {
+  .columns > div {
+    flex-direction: row;
+    gap: var(--columns-gap);
+  }
+
+  .columns > div > div {
+    flex: 1;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,12 @@
+:root {
+  --heading-font-family: "Helvetica Neue LT Thin", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --link-color: #444444;
+  --link-hover-color: #000000;
+  --section-padding: 40px 16px;
+  --nav-height: 48px;
+}
+
+html, body { overflow: auto !important; }

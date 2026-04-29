@@ -1,0 +1,51 @@
+/* Footer Disclaimer Block */
+.footer-disclaimer {
+  --disclaimer-bg: #2c343d;
+  --disclaimer-text: #ffffff;
+  --disclaimer-padding: 27px 24px;
+  --disclaimer-font-size: 12px;
+
+  background: var(--disclaimer-bg);
+  color: var(--disclaimer-text);
+  padding: var(--disclaimer-padding);
+  font-size: var(--disclaimer-font-size);
+  line-height: 1.5;
+}
+
+.footer-disclaimer-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.footer-disclaimer > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer-disclaimer p {
+  margin: 0 0 12px;
+}
+
+.footer-disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-disclaimer a:any-link {
+  color: var(--disclaimer-text);
+  text-decoration: underline;
+}
+
+.footer-disclaimer a:hover {
+  opacity: 0.8;
+}
+
+@media (width >= 900px) {
+  .footer-disclaimer {
+    --disclaimer-padding: 27px 32px;
+  }
+
+  .footer-disclaimer > div {
+    padding: 0 32px;
+  }
+}
