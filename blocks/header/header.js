@@ -6,6 +6,7 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
+    if (!nav) return;
     const navSections = nav.querySelector('.nav-sections');
     if (!navSections) return;
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
@@ -16,7 +17,7 @@ function closeOnEscape(e) {
     } else if (!isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
+      nav.querySelector('.nav-hamburger button')?.focus();
     }
   }
 }
@@ -39,11 +40,12 @@ function closeOnFocusLost(e) {
 
 function openOnKeydown(e) {
   const focused = document.activeElement;
-  const isNavDrop = focused.className === 'nav-drop';
+  const isNavDrop = focused?.classList.contains('nav-drop');
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
     // eslint-disable-next-line no-use-before-define
-    toggleAllNavSections(focused.closest('.nav-sections'));
+    const sectionsEl = focused.closest('.nav-sections');
+    if (sectionsEl) toggleAllNavSections(sectionsEl);
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
   }
 }
@@ -54,7 +56,7 @@ function focusNavSection() {
 
 function toggleAllNavSections(sections, expanded = false) {
   if (!sections) return;
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
+  sections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
   });
 }
@@ -64,8 +66,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
-  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  const collapseAll = expanded || isDesktop.matches ? 'false' : 'true';
+  toggleAllNavSections(navSections, collapseAll);
+  button?.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   if (navSections) {
     const navDrops = navSections.querySelectorAll('.nav-drop');
     if (isDesktop.matches) {
@@ -92,6 +95,31 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
+/**
+ * Find the top-level nav UL (not a nested sub-menu UL inside an LI).
+ * @param {ParentNode} root
+ * @returns {HTMLUListElement | null}
+ */
+function findMainNavUl(root) {
+  const candidates = [...root.querySelectorAll('ul')];
+  return candidates.find((ul) => !ul.closest('li')) ?? null;
+}
+
+/**
+ * Utility strip paragraph: most links (pipe-separated row).
+ * @param {ParentNode} root
+ * @returns {HTMLParagraphElement | null}
+ */
+function findUtilityLinksParagraph(root) {
+  const paragraphs = [...root.querySelectorAll('p')];
+  const scored = paragraphs.map((p) => ({
+    p,
+    n: p.querySelectorAll('a').length,
+  }));
+  scored.sort((a, b) => b.n - a.n);
+  return scored[0]?.n >= 4 ? scored[0].p : null;
+}
+
 function buildNavTools(linksP) {
   const tools = document.createElement('div');
   tools.className = 'nav-tools';
@@ -102,7 +130,8 @@ function buildNavTools(linksP) {
   rightLinks.className = 'nav-tools-right';
 
   const allLinks = [...linksP.querySelectorAll('a')];
-  const splitIndex = allLinks.findIndex((a) => a.textContent.trim() === 'Contact Us');
+  let splitIndex = allLinks.findIndex((a) => a.textContent.trim() === 'Contact Us');
+  if (splitIndex < 0) splitIndex = Math.min(4, allLinks.length);
 
   allLinks.forEach((a, i) => {
     const item = document.createElement('a');
@@ -128,49 +157,55 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
+  if (!fragment) {
+    // eslint-disable-next-line no-console
+    console.warn('Header: nav fragment could not be loaded:', navPath);
+    return;
+  }
+
+  const logoPicture = fragment.querySelector('picture');
+  const logoImg = fragment.querySelector('img[alt*="BT"], img[alt*="bt"], img[alt*="logo"]')
+    || fragment.querySelector('.default-content-wrapper img');
+
+  const linksP = findUtilityLinksParagraph(fragment);
+  const mainUl = findMainNavUl(fragment);
 
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
 
-  const contentWrapper = fragment.querySelector('.default-content-wrapper');
-  if (!contentWrapper) return;
-
-  const logoPicture = contentWrapper.querySelector('picture');
-  const linksP = contentWrapper.querySelector('p:has(a)');
-  const mainUl = contentWrapper.querySelector(':scope > ul');
-
-  // Build brand
   const navBrand = document.createElement('div');
   navBrand.className = 'nav-brand';
   if (logoPicture) {
     const brandLink = document.createElement('a');
     brandLink.href = '/';
     brandLink.setAttribute('aria-label', 'Home');
-    brandLink.append(logoPicture);
+    brandLink.append(logoPicture.cloneNode(true));
+    navBrand.append(brandLink);
+  } else if (logoImg) {
+    const brandLink = document.createElement('a');
+    brandLink.href = '/';
+    brandLink.setAttribute('aria-label', 'Home');
+    brandLink.append(logoImg.cloneNode(true));
     navBrand.append(brandLink);
   }
 
-  // Build tools (top bar links)
   const navTools = linksP ? buildNavTools(linksP) : document.createElement('div');
   if (!linksP) navTools.className = 'nav-tools';
 
-  // Build sections (main nav)
   const navSections = document.createElement('div');
   navSections.className = 'nav-sections';
   if (mainUl) {
     const wrapper = document.createElement('div');
     wrapper.className = 'default-content-wrapper';
-    wrapper.append(mainUl);
+    wrapper.append(mainUl.cloneNode(true));
     navSections.append(wrapper);
   }
 
-  // Build search
   const navSearch = document.createElement('div');
   navSearch.className = 'nav-search';
-  navSearch.innerHTML = '<button type="button" aria-label="Search"><span class="icon icon-search"></span></button>';
+  navSearch.innerHTML = '<button type="button" aria-label="Search"><span class="icon icon-search" aria-hidden="true"></span></button>';
 
-  // Hamburger
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
@@ -182,7 +217,6 @@ export default async function decorate(block) {
   decorateIcons(navSearch);
   nav.setAttribute('aria-expanded', 'false');
 
-  // Setup nav section dropdowns
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
