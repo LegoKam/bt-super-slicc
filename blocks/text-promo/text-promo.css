@@ -1,16 +1,16 @@
-/* text-promp block */
+/* text-promo block */
 
-.text-promp-wrapper {
+.text-promo-wrapper {
   max-width: 100% !important;
   padding: 0 !important;
 }
 
-main > .section:has(.text-promp-wrapper) {
+main > .section:has(.text-promo-wrapper) {
   margin: 0;
   padding: 0;
 }
 
-.text-promp {
+.text-promo {
   display: flex;
   gap: 0;
   max-width: 1200px;
@@ -20,17 +20,17 @@ main > .section:has(.text-promp-wrapper) {
 }
 
 /* Image cell */
-.text-promp .text-promp-image {
+.text-promo .text-promo-image {
   flex: 0 0 38%;
   overflow: hidden;
 }
 
-.text-promp .text-promp-image picture {
+.text-promo .text-promo-image picture {
   display: block;
   line-height: 0;
 }
 
-.text-promp .text-promp-image img {
+.text-promo .text-promo-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -38,7 +38,7 @@ main > .section:has(.text-promp-wrapper) {
 }
 
 /* Text cell */
-.text-promp .text-promp-text {
+.text-promo .text-promo-text {
   flex: 1;
   padding: 24px 40px;
   display: flex;
@@ -48,12 +48,12 @@ main > .section:has(.text-promp-wrapper) {
 }
 
 /* Title link */
-.text-promp .text-promp-text .button-container {
+.text-promo .text-promo-text .button-container {
   display: block;
   margin-bottom: 16px;
 }
 
-main .text-promp a.button.primary:any-link {
+main .text-promo a.button.primary:any-link {
   background: none;
   border: none;
   border-radius: 0;
@@ -69,58 +69,58 @@ main .text-promp a.button.primary:any-link {
   font-family: var(--body-font-family, sans-serif);
 }
 
-main .text-promp a.button.primary:any-link:hover {
+main .text-promo a.button.primary:any-link:hover {
   text-decoration: underline;
 }
 
 /* Body text */
-.text-promp .text-promp-text p {
+.text-promo .text-promo-text p {
   margin: 0 0 16px;
   font-size: 16px;
   line-height: 1.6;
   color: #333;
 }
 
-.text-promp .text-promp-text p:last-child {
+.text-promo .text-promo-text p:last-child {
   margin-bottom: 0;
 }
 
-.text-promp .text-promp-text strong {
+.text-promo .text-promo-text strong {
   font-weight: 700;
   color: #171717;
 }
 
-.text-promp .text-promp-text a:any-link {
+.text-promo .text-promo-text a:any-link {
   color: #004a92;
   text-decoration: underline;
 }
 
-.text-promp .text-promp-text a:hover {
+.text-promo .text-promo-text a:hover {
   color: #003366;
 }
 
 /* Mobile: stack vertically */
 @media (width < 600px) {
-  .text-promp {
+  .text-promo {
     flex-direction: column;
     padding: 16px;
   }
 
-  .text-promp .text-promp-image {
+  .text-promo .text-promo-image {
     flex: none;
   }
 
-  .text-promp .text-promp-text {
+  .text-promo .text-promo-text {
     padding: 20px 16px;
   }
 }
 
 @media (width >= 900px) {
-  .text-promp {
+  .text-promo {
     padding: 32px;
   }
 
-  .text-promp .text-promp-text {
+  .text-promo .text-promo-text {
     padding: 32px 48px;
   }
 }

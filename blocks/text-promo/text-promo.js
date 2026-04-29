@@ -6,7 +6,7 @@ export default async function decorate(block) {
   const picture = cell.querySelector('picture');
 
   const imageDiv = document.createElement('div');
-  imageDiv.className = 'text-promp-image';
+  imageDiv.className = 'text-promo-image';
   if (picture) {
     const pictureParent = picture.parentElement;
     imageDiv.append(picture);
@@ -16,7 +16,7 @@ export default async function decorate(block) {
   }
 
   const textDiv = document.createElement('div');
-  textDiv.className = 'text-promp-text';
+  textDiv.className = 'text-promo-text';
   while (cell.firstChild) {
     textDiv.append(cell.firstChild);
   }
