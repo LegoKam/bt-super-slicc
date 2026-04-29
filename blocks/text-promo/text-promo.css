@@ -1,19 +1,5 @@
 /* text-promo block */
-.text-promo {
-  --text-promo-bg: #f1f1f1;
-  --text-promo-text: #171717;
-  --text-promo-link: #004a92;
-  --text-promo-font-size: 16px;
-  --text-promo-line-height: 1.5;
 
-  background: var(--text-promo-bg);
-  color: var(--text-promo-text);
-  padding: 32px 0;
-  font-size: var(--text-promo-font-size);
-  line-height: var(--text-promo-line-height);
-}
-
-/* full-width background override */
 .text-promo-wrapper {
   max-width: 100% !important;
   padding: 0 !important;
@@ -21,65 +7,82 @@
 
 main > .section:has(.text-promo-wrapper) {
   margin: 0;
+  padding: 0;
 }
 
-/* content row — flex side-by-side */
+.text-promo {
+  background: #f0f0f0;
+  padding: 32px 24px;
+}
+
+/* content row */
 .text-promo > div {
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  max-width: 900px;
+  gap: 0;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
 }
 
 /* image cell */
 .text-promo > div > div:first-child {
-  flex: 0 0 30%;
+  flex: 0 0 35%;
   overflow: hidden;
+  line-height: 0;
 }
 
 .text-promo > div > div:first-child picture {
   display: block;
-  line-height: 0;
 }
 
 .text-promo > div > div:first-child img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
 /* text cell */
 .text-promo > div > div:last-child {
   flex: 1;
+  padding: 32px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: #fff;
 }
 
-.text-promo h3 {
-  margin-top: 0;
-  margin-bottom: 0.4em;
+/* title link */
+.text-promo > div > div:last-child .button-container {
+  display: block;
+  margin-bottom: 16px;
+}
+
+main .text-promo a.button.primary:any-link {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: #004a92;
   font-size: 18px;
   font-weight: 700;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  display: inline;
   font-family: var(--body-font-family, sans-serif);
 }
 
-.text-promo h3 a {
-  color: var(--text-promo-link);
-  text-decoration: none;
-}
-
-.text-promo h3 a:hover {
+main .text-promo a.button.primary:any-link:hover {
   text-decoration: underline;
 }
 
+/* body text */
 .text-promo p {
   margin: 0 0 16px;
-  font-size: var(--text-promo-font-size);
-  line-height: var(--text-promo-line-height);
-  color: var(--text-promo-text);
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
 }
 
 .text-promo p:last-child {
@@ -88,23 +91,20 @@ main > .section:has(.text-promo-wrapper) {
 
 .text-promo strong {
   font-weight: 700;
+  color: #171717;
 }
 
 .text-promo a:any-link {
-  color: var(--text-promo-link);
+  color: #004a92;
   text-decoration: underline;
 }
 
 .text-promo a:hover {
-  text-decoration: underline;
+  color: #003366;
 }
 
-/* button reset — keep links as inline text links */
+/* button reset */
 main .text-promo .button-wrapper {
-  display: inline;
-}
-
-main .text-promo .button-container {
   display: inline;
 }
 
@@ -112,7 +112,7 @@ main .text-promo a.button:any-link {
   background: none;
   border: none;
   border-radius: 0;
-  color: var(--text-promo-link);
+  color: #004a92;
   font-size: inherit;
   font-weight: inherit;
   padding: 0;
@@ -123,42 +123,23 @@ main .text-promo a.button:any-link {
   display: inline;
 }
 
-/* CTA button — secondary outlined style */
-main .text-promo a.button.secondary:any-link {
-  display: inline-block;
-  background: #fff;
-  color: var(--text-promo-link);
-  border: 1px solid var(--text-promo-link);
-  border-radius: 5px;
-  padding: 10px 24px;
-  font-size: 16px;
-  font-weight: 400;
-  text-decoration: none;
-  text-align: center;
-  white-space: nowrap;
-}
-
-main .text-promo a.button.secondary:hover {
-  background: var(--text-promo-link);
-  color: #fff;
-}
-
-/* responsive: stack on mobile */
+/* mobile: stack */
 @media (max-width: 599px) {
   .text-promo > div {
     flex-direction: column;
-    gap: 16px;
   }
 
   .text-promo > div > div:first-child {
     flex: none;
   }
+
+  .text-promo > div > div:last-child {
+    padding: 24px 16px;
+  }
 }
 
 @media (min-width: 900px) {
-  .text-promo > div {
-    max-width: 1000px;
-    padding: 0 32px;
-    gap: 32px;
+  .text-promo > div > div:last-child {
+    padding: 40px 48px;
   }
 }
