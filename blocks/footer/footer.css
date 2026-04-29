@@ -1,14 +1,140 @@
+/* Footer */
 footer {
-  background-color: transparent;
-  font-size: var(--body-font-size-xs);
+  background-color: #00232b;
+  color: #c8d8dc;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 footer .footer > div {
-  margin: 0;
-  max-width: 100%;
-  padding: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 40px 32px 32px;
 }
 
 footer .footer p {
   margin: 0;
+}
+
+footer a:any-link {
+  color: #c8d8dc;
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+/* Top row: logo left, social right */
+footer .footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+footer .footer-logo img {
+  width: 80px;
+  height: auto;
+}
+
+footer .footer-social {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+footer .footer-social p {
+  line-height: 0;
+}
+
+footer .footer-social img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+}
+
+/* Nav links */
+footer .footer-nav {
+  margin-bottom: 32px;
+}
+
+footer .footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+footer .footer-nav ul li {
+  display: flex;
+  align-items: center;
+}
+
+footer .footer-nav ul li::after {
+  content: "|";
+  margin: 0 16px;
+  color: #4a6a72;
+}
+
+footer .footer-nav ul li:last-child::after {
+  content: none;
+}
+
+footer .footer-nav ul li a {
+  color: #c8d8dc;
+  text-decoration: none;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+footer .footer-nav ul li a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Disclaimer */
+footer .footer-disclaimer {
+  border-top: 1px solid #1a3a42;
+  padding-top: 24px;
+}
+
+footer .footer-disclaimer p {
+  color: #90a8ae;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+footer .footer-disclaimer p:last-child {
+  margin-bottom: 0;
+  margin-top: 16px;
+  color: #90a8ae;
+}
+
+footer .footer-disclaimer a:any-link {
+  color: #90a8ae;
+  text-decoration: underline;
+}
+
+footer .footer-disclaimer a:hover {
+  color: #c8d8dc;
+}
+
+/* Mobile */
+@media (width < 600px) {
+  footer .footer > div {
+    padding: 32px 16px 24px;
+  }
+
+  footer .footer-nav ul {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  footer .footer-nav ul li::after {
+    content: none;
+  }
 }
